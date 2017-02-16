@@ -42,12 +42,7 @@ def add_file():
 
     return render_template('add_file.html')
     
-import os
-rootdir = os.getcwd()
-print rootdir
-for subdir, dirs, files in os.walk(app.config["UPLOAD_FOLDER"]):
- for file in files:
-    print os.path.join(subdir, file) 
+
     
     
     
@@ -79,7 +74,14 @@ def login():
 @app.route('/filelisting')
 def filelisting():
     """list files in directory"""
-    return render_template("filelisting.html", file_list=getfiles())
+   
+    rootdir = os.getcwd()
+    print rootdir
+    for subdir, dirs, files in os.walk(app.config["UPLOAD_FOLDER"]):
+        for file in files:
+            print os.path.join(subdir, file) 
+    
+        return render_template("filelisting.html", file_list=getfiles())
     
     
 @app.route('/logout')
